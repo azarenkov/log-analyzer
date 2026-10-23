@@ -1,0 +1,4 @@
+dataset,train,train_anom,val,val_anom,test,test_anom,templates
+HDFS,5558,192,793,29,1589,92,19
+BGL,70,15,10,5,20,8,120
+Thunderbird,70,0,10,0,20,0,149

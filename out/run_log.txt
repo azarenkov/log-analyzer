@@ -1,0 +1,87 @@
+python 3.13.17 | torch 2.14.1+cu130 | sklearn 1.9.1 | pandas 3.0.5 | numpy 2.5.3
+sha256 HDFS_100k.log_structured.csv 0b18e7d3e0bd991d
+sha256 anomaly_label.csv 78de297d3862e372
+sha256 BGL_2k.log_structured.csv 3fe74103c0b02a28
+sha256 Thunderbird_2k.log_structured.csv c62196d8a3449de7
+HDFS: 104815 lines -> 7940 block sessions, anomalies=313
+BGL: 2000 lines -> 100 windows of 20, anomalous=28
+Thunderbird: 2000 lines -> 100 windows of 20, anomalous=0
+{'dataset': 'HDFS', 'train': 5558, 'train_anom': 192, 'val': 793, 'val_anom': 29, 'test': 1589, 'test_anom': 92, 'templates': 19}
+{'dataset': 'BGL', 'train': 70, 'train_anom': 15, 'val': 10, 'val_anom': 5, 'test': 20, 'test_anom': 8, 'templates': 120}
+{'dataset': 'Thunderbird', 'train': 70, 'train_anom': 0, 'val': 10, 'val_anom': 0, 'test': 20, 'test_anom': 0, 'templates': 149}
+template-word overlap HDFS-Thunderbird: 17 shared of 415
+template-word overlap BGL-HDFS: 14 shared of 353
+template-word overlap BGL-Thunderbird: 68 shared of 643
+[local] logreg      HDFS->HDFS seed=0 F1=0.699 P=0.980 R=0.543 FPR=0.001 TP=50 FP=1 FN=42 TN=1496 t=0.8s
+[zero-shot] logreg      HDFS->BGL seed=0 F1=0.462 P=0.333 R=0.750 FPR=1.000 TP=6 FP=12 FN=2 TN=0 t=0.8s
+[adapt5] logreg      HDFS->BGL seed=0 F1=0.571 P=0.400 R=1.000 FPR=1.000 TP=8 FP=12 FN=0 TN=0 t=0.7s
+[zero-shot] logreg      HDFS->Thunderbird seed=0 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.8s
+[adapt5] logreg      HDFS->Thunderbird seed=0 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.7s
+[zero-shot] logreg      BGL->HDFS seed=0 F1=0.278 P=0.938 R=0.163 FPR=0.001 TP=15 FP=1 FN=77 TN=1496 t=0.1s
+[adapt5] logreg      BGL->HDFS seed=0 F1=0.562 P=1.000 R=0.391 FPR=0.000 TP=36 FP=0 FN=56 TN=1497 t=0.2s
+[local] logreg      BGL->BGL seed=0 F1=0.545 P=0.429 R=0.750 FPR=0.667 TP=6 FP=8 FN=2 TN=4 t=0.0s
+[zero-shot] logreg      BGL->Thunderbird seed=0 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.0s
+[adapt5] logreg      BGL->Thunderbird seed=0 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.0s
+[skip] logreg source=Thunderbird: training partition has one class -> local and transfer from Thunderbird are N/A
+[local] bilstm      HDFS->HDFS seed=0 F1=0.699 P=0.980 R=0.543 FPR=0.001 TP=50 FP=1 FN=42 TN=1496 t=13.3s
+[local] bilstm      HDFS->HDFS seed=1 F1=0.699 P=0.980 R=0.543 FPR=0.001 TP=50 FP=1 FN=42 TN=1496 t=12.2s
+[local] bilstm      HDFS->HDFS seed=2 F1=0.681 P=0.980 R=0.522 FPR=0.001 TP=48 FP=1 FN=44 TN=1496 t=11.9s
+[zero-shot] bilstm      HDFS->BGL seed=0 F1=0.571 P=0.400 R=1.000 FPR=1.000 TP=8 FP=12 FN=0 TN=0 t=11.6s
+[adapt5] bilstm      HDFS->BGL seed=0 F1=0.000 P=0.000 R=0.000 FPR=0.000 TP=0 FP=0 FN=8 TN=12 t=0.0s
+[zero-shot] bilstm      HDFS->BGL seed=1 F1=0.571 P=0.400 R=1.000 FPR=1.000 TP=8 FP=12 FN=0 TN=0 t=10.6s
+[adapt5] bilstm      HDFS->BGL seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.000 TP=0 FP=0 FN=8 TN=12 t=0.0s
+[zero-shot] bilstm      HDFS->BGL seed=2 F1=0.571 P=0.400 R=1.000 FPR=1.000 TP=8 FP=12 FN=0 TN=0 t=11.2s
+[adapt5] bilstm      HDFS->BGL seed=2 F1=0.571 P=0.400 R=1.000 FPR=1.000 TP=8 FP=12 FN=0 TN=0 t=0.0s
+[zero-shot] bilstm      HDFS->Thunderbird seed=0 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=11.2s
+[adapt5] bilstm      HDFS->Thunderbird seed=0 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.0s
+[zero-shot] bilstm      HDFS->Thunderbird seed=1 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=11.9s
+[adapt5] bilstm      HDFS->Thunderbird seed=1 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.0s
+[zero-shot] bilstm      HDFS->Thunderbird seed=2 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=11.4s
+[adapt5] bilstm      HDFS->Thunderbird seed=2 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.0s
+[zero-shot] bilstm      BGL->HDFS seed=0 F1=0.109 P=0.058 R=1.000 FPR=1.000 TP=92 FP=1497 FN=0 TN=0 t=0.7s
+[adapt5] bilstm      BGL->HDFS seed=0 F1=0.551 P=1.000 R=0.380 FPR=0.000 TP=35 FP=0 FN=57 TN=1497 t=0.7s
+[zero-shot] bilstm      BGL->HDFS seed=1 F1=0.109 P=0.058 R=1.000 FPR=1.000 TP=92 FP=1497 FN=0 TN=0 t=1.1s
+[adapt5] bilstm      BGL->HDFS seed=1 F1=0.296 P=1.000 R=0.174 FPR=0.000 TP=16 FP=0 FN=76 TN=1497 t=0.7s
+[zero-shot] bilstm      BGL->HDFS seed=2 F1=0.109 P=0.058 R=1.000 FPR=1.000 TP=92 FP=1497 FN=0 TN=0 t=0.5s
+[adapt5] bilstm      BGL->HDFS seed=2 F1=0.551 P=1.000 R=0.380 FPR=0.000 TP=35 FP=0 FN=57 TN=1497 t=0.8s
+[local] bilstm      BGL->BGL seed=0 F1=0.696 P=0.533 R=1.000 FPR=0.583 TP=8 FP=7 FN=0 TN=5 t=0.3s
+[local] bilstm      BGL->BGL seed=1 F1=0.538 P=0.389 R=0.875 FPR=0.917 TP=7 FP=11 FN=1 TN=1 t=0.3s
+[local] bilstm      BGL->BGL seed=2 F1=0.222 P=1.000 R=0.125 FPR=0.000 TP=1 FP=0 FN=7 TN=12 t=0.3s
+[zero-shot] bilstm      BGL->Thunderbird seed=0 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.3s
+[adapt5] bilstm      BGL->Thunderbird seed=0 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.0s
+[zero-shot] bilstm      BGL->Thunderbird seed=1 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.2s
+[adapt5] bilstm      BGL->Thunderbird seed=1 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.0s
+[zero-shot] bilstm      BGL->Thunderbird seed=2 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.2s
+[adapt5] bilstm      BGL->Thunderbird seed=2 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.0s
+[skip] bilstm source=Thunderbird: training partition has one class -> local and transfer from Thunderbird are N/A
+[local] transformer HDFS->HDFS seed=0 F1=0.551 P=1.000 R=0.380 FPR=0.000 TP=35 FP=0 FN=57 TN=1497 t=52.6s
+[local] transformer HDFS->HDFS seed=1 F1=0.671 P=0.979 R=0.511 FPR=0.001 TP=47 FP=1 FN=45 TN=1496 t=42.8s
+[local] transformer HDFS->HDFS seed=2 F1=0.562 P=1.000 R=0.391 FPR=0.000 TP=36 FP=0 FN=56 TN=1497 t=45.7s
+[zero-shot] transformer HDFS->BGL seed=0 F1=0.000 P=0.000 R=0.000 FPR=0.000 TP=0 FP=0 FN=8 TN=12 t=41.9s
+[adapt5] transformer HDFS->BGL seed=0 F1=0.000 P=0.000 R=0.000 FPR=0.000 TP=0 FP=0 FN=8 TN=12 t=0.1s
+[zero-shot] transformer HDFS->BGL seed=1 F1=0.571 P=0.400 R=1.000 FPR=1.000 TP=8 FP=12 FN=0 TN=0 t=40.1s
+[adapt5] transformer HDFS->BGL seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.000 TP=0 FP=0 FN=8 TN=12 t=0.1s
+[zero-shot] transformer HDFS->BGL seed=2 F1=0.571 P=0.400 R=1.000 FPR=1.000 TP=8 FP=12 FN=0 TN=0 t=39.4s
+[adapt5] transformer HDFS->BGL seed=2 F1=0.000 P=0.000 R=0.000 FPR=0.000 TP=0 FP=0 FN=8 TN=12 t=0.1s
+[zero-shot] transformer HDFS->Thunderbird seed=0 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=42.3s
+[adapt5] transformer HDFS->Thunderbird seed=0 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.1s
+[zero-shot] transformer HDFS->Thunderbird seed=1 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=42.0s
+[adapt5] transformer HDFS->Thunderbird seed=1 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.1s
+[zero-shot] transformer HDFS->Thunderbird seed=2 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=45.0s
+[adapt5] transformer HDFS->Thunderbird seed=2 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.1s
+[zero-shot] transformer BGL->HDFS seed=0 F1=0.069 P=0.037 R=0.620 FPR=1.000 TP=57 FP=1497 FN=35 TN=0 t=1.0s
+[adapt5] transformer BGL->HDFS seed=0 F1=0.574 P=1.000 R=0.402 FPR=0.000 TP=37 FP=0 FN=55 TN=1497 t=1.7s
+[zero-shot] transformer BGL->HDFS seed=1 F1=0.109 P=0.058 R=1.000 FPR=1.000 TP=92 FP=1497 FN=0 TN=0 t=0.9s
+[adapt5] transformer BGL->HDFS seed=1 F1=0.699 P=0.980 R=0.543 FPR=0.001 TP=50 FP=1 FN=42 TN=1496 t=1.5s
+[zero-shot] transformer BGL->HDFS seed=2 F1=0.109 P=0.058 R=1.000 FPR=1.000 TP=92 FP=1497 FN=0 TN=0 t=0.8s
+[adapt5] transformer BGL->HDFS seed=2 F1=0.109 P=0.058 R=1.000 FPR=1.000 TP=92 FP=1497 FN=0 TN=0 t=1.6s
+[local] transformer BGL->BGL seed=0 F1=0.526 P=0.455 R=0.625 FPR=0.500 TP=5 FP=6 FN=3 TN=6 t=0.6s
+[local] transformer BGL->BGL seed=1 F1=0.545 P=1.000 R=0.375 FPR=0.000 TP=3 FP=0 FN=5 TN=12 t=0.6s
+[local] transformer BGL->BGL seed=2 F1=0.593 P=0.421 R=1.000 FPR=0.917 TP=8 FP=11 FN=0 TN=1 t=0.6s
+[zero-shot] transformer BGL->Thunderbird seed=0 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.5s
+[adapt5] transformer BGL->Thunderbird seed=0 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.1s
+[zero-shot] transformer BGL->Thunderbird seed=1 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.7s
+[adapt5] transformer BGL->Thunderbird seed=1 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.1s
+[zero-shot] transformer BGL->Thunderbird seed=2 F1=nan P=nan R=nan FPR=1.000 TP=0 FP=20 FN=0 TN=0 t=0.7s
+[adapt5] transformer BGL->Thunderbird seed=2 F1=nan P=nan R=nan FPR=0.000 TP=0 FP=0 FN=0 TN=20 t=0.1s
+[skip] transformer source=Thunderbird: training partition has one class -> local and transfer from Thunderbird are N/A

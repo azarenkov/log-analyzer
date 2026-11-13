@@ -1,0 +1,27 @@
+runs=225 seeds=[np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)]
+H1: mean diff=-0.611 (95% CI -0.750..-0.466), median=-0.647, W=0.0, p=3.81e-06, r_rb=-1.00, 18/18 in predicted direction -> reject H0 (supported)
+   logreg      mean diff=-0.573, 6/6 in predicted direction, exact p=0.016
+   bilstm      mean diff=-0.626, 6/6 in predicted direction, exact p=0.016
+   transformer mean diff=-0.634, 6/6 in predicted direction, exact p=0.016
+H2: mean diff=+0.312 (95% CI +0.222..+0.413), median=+0.297, W=169.0, p=1.14e-05, r_rb=+0.98, 17/18 in predicted direction -> reject H0 (supported)
+   logreg      mean diff=+0.338, 6/6 in predicted direction, exact p=0.016
+   bilstm      mean diff=+0.273, 5/6 in predicted direction, exact p=0.031
+   transformer mean diff=+0.324, 6/6 in predicted direction, exact p=0.016
+
+  setting       model  mean_rank  mean_F1  mean_FPR  mean_train_s
+    local      logreg      2.333    0.967     0.031         0.566
+    local      bilstm      1.667    0.981     0.046        23.825
+    local transformer      2.000    0.971     0.106       113.683
+zero-shot      logreg      1.917    0.394     0.665         0.136
+zero-shot      bilstm      2.000    0.354     0.614        23.825
+zero-shot transformer      2.083    0.337     0.663       113.683
+   adapt5      logreg      1.500    0.732     0.166         0.147
+   adapt5      bilstm      2.167    0.627     0.267         5.105
+   adapt5 transformer      2.333    0.662     0.154        14.242
+
+degenerate runs (all positive / all negative):
+           all_pos  all_neg
+setting                    
+adapt5           3        1
+local            1        0
+zero-shot       44       16

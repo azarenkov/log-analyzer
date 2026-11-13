@@ -1,0 +1,4 @@
+dataset,sessions,anomalous,anomaly_pct,event_types,template_words,train,train_anom,val,val_anom,test,test_anom
+HDFS,575061,16838,2.93,29,74,20000,586,5000,146,115013,3367
+BGL,69252,31375,45.31,394,664,20000,9061,5000,2266,13851,6275
+Thunderbird,5855,4309,73.6,6178,3792,4098,3016,585,431,1172,862

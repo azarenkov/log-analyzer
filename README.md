@@ -28,3 +28,8 @@ python fig.py out/results_summary.csv out/f1_pilot.png
 
 Notes: F1/precision/recall are N/A (empty) when the target test partition has no anomalies
 (Thunderbird_2k). Neural results can differ slightly across hardware/PyTorch builds.
+
+## Full experiment
+
+The complete experiment on the full labelled HDFS, BGL and Thunderbird datasets (225 runs, H1/H2 Wilcoxon tests)
+is in [`full_experiment/`](full_experiment/README.md).

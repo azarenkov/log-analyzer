@@ -1,0 +1,248 @@
+HDFS: sessions=575061 anom=16838 event_types=29 unmapped_event_ids=[] train=20000(586) val=5000(146) test=115013(3367)
+BGL: sessions=69252 anom=31375 event_types=394 unmapped_event_ids=[] train=20000(9061) val=5000(2266) test=13851(6275)
+Thunderbird: sessions=5855 anom=4309 event_types=6178 unmapped_event_ids=['6425'] train=4098(3016) val=585(431) test=1172(862)
+template-word overlap HDFS-Thunderbird: 53 shared of 3813
+template-word overlap BGL-HDFS: 31 shared of 707
+template-word overlap BGL-Thunderbird: 399 shared of 4057
+python 3.13.17 | torch 2.14.1+cu130 | sklearn 1.9.1 | numpy 2.5.3 | threads 2 | seeds [0]
+[local    ] logreg      HDFS->HDFS        seed=0 F1=0.942 P=0.890 R=1.000 FPR=0.004 train_s=0.2
+[zero-shot] logreg      HDFS->BGL         seed=0 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->BGL         seed=0 F1=0.765 P=0.619 R=1.000 FPR=0.510 train_s=0.1 adapt=1000(453)
+[zero-shot] logreg      HDFS->Thunderbird seed=0 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->Thunderbird seed=0 F1=0.945 P=0.896 R=1.000 FPR=0.323 train_s=0.1 adapt=205(149)
+[zero-shot] logreg      BGL->HDFS        seed=0 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=0.2
+[adapt5   ] logreg      BGL->HDFS        seed=0 F1=0.527 P=1.000 R=0.358 FPR=0.000 train_s=0.2 adapt=1000(35)
+[local    ] logreg      BGL->BGL         seed=0 F1=0.980 P=0.992 R=0.969 FPR=0.007 train_s=0.5
+[zero-shot] logreg      BGL->Thunderbird seed=0 F1=0.836 P=0.733 R=0.973 FPR=0.987 train_s=0.1
+[adapt5   ] logreg      BGL->Thunderbird seed=0 F1=0.977 P=0.955 R=1.000 FPR=0.132 train_s=0.1 adapt=205(149)
+[zero-shot] logreg      Thunderbird->HDFS        seed=0 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->HDFS        seed=0 F1=0.319 P=1.000 R=0.190 FPR=0.000 train_s=0.2 adapt=1000(35)
+[zero-shot] logreg      Thunderbird->BGL         seed=0 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->BGL         seed=0 F1=0.868 P=0.987 R=0.775 FPR=0.009 train_s=0.2 adapt=1000(453)
+[local    ] logreg      Thunderbird->Thunderbird seed=0 F1=0.979 P=0.970 R=0.987 FPR=0.084 train_s=1.1
+[local    ] bilstm      HDFS->HDFS        seed=0 F1=0.971 P=0.945 R=0.998 FPR=0.002 train_s=40.3
+[zero-shot] bilstm      HDFS->BGL         seed=0 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=40.3
+[adapt5   ] bilstm      HDFS->BGL         seed=0 F1=0.920 P=0.888 R=0.954 FPR=0.099 train_s=2.4 adapt=1000(453)
+[zero-shot] bilstm      HDFS->Thunderbird seed=0 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=40.3
+[adapt5   ] bilstm      HDFS->Thunderbird seed=0 F1=0.935 P=0.879 R=0.999 FPR=0.381 train_s=0.5 adapt=205(149)
+[zero-shot] bilstm      BGL->HDFS        seed=0 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=31.2
+[adapt5   ] bilstm      BGL->HDFS        seed=0 F1=0.239 P=0.147 R=0.649 FPR=0.114 train_s=12.0 adapt=1000(35)
+[local    ] bilstm      BGL->BGL         seed=0 F1=0.999 P=1.000 R=0.998 FPR=0.000 train_s=31.2
+[zero-shot] bilstm      BGL->Thunderbird seed=0 F1=0.849 P=0.737 R=1.000 FPR=0.990 train_s=31.2
+[adapt5   ] bilstm      BGL->Thunderbird seed=0 F1=0.796 P=0.956 R=0.682 FPR=0.087 train_s=0.4 adapt=205(149)
+[zero-shot] bilstm      Thunderbird->HDFS        seed=0 F1=0.082 P=0.046 R=0.374 FPR=0.235 train_s=8.9
+[adapt5   ] bilstm      Thunderbird->HDFS        seed=0 F1=0.285 P=0.178 R=0.703 FPR=0.098 train_s=12.7 adapt=1000(35)
+[zero-shot] bilstm      Thunderbird->BGL         seed=0 F1=0.492 P=0.389 R=0.670 FPR=0.872 train_s=8.9
+[adapt5   ] bilstm      Thunderbird->BGL         seed=0 F1=0.939 P=0.961 R=0.918 FPR=0.031 train_s=2.2 adapt=1000(453)
+[local    ] bilstm      Thunderbird->Thunderbird seed=0 F1=0.978 P=0.957 R=1.000 FPR=0.126 train_s=8.9
+[local    ] transformer HDFS->HDFS        seed=0 F1=0.942 P=0.891 R=0.999 FPR=0.004 train_s=150.3
+[zero-shot] transformer HDFS->BGL         seed=0 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=150.3
+[adapt5   ] transformer HDFS->BGL         seed=0 F1=0.922 P=0.902 R=0.942 FPR=0.084 train_s=8.7 adapt=1000(453)
+[zero-shot] transformer HDFS->Thunderbird seed=0 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=150.3
+[adapt5   ] transformer HDFS->Thunderbird seed=0 F1=0.964 P=0.954 R=0.973 FPR=0.129 train_s=1.5 adapt=205(149)
+[zero-shot] transformer BGL->HDFS        seed=0 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=151.8
+[adapt5   ] transformer BGL->HDFS        seed=0 F1=0.613 P=0.829 R=0.486 FPR=0.003 train_s=35.9 adapt=1000(35)
+[local    ] transformer BGL->BGL         seed=0 F1=1.000 P=1.000 R=0.999 FPR=0.000 train_s=151.8
+[zero-shot] transformer BGL->Thunderbird seed=0 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=151.8
+[adapt5   ] transformer BGL->Thunderbird seed=0 F1=0.945 P=0.897 R=0.999 FPR=0.319 train_s=1.4 adapt=205(149)
+[zero-shot] transformer Thunderbird->HDFS        seed=0 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=33.6
+[adapt5   ] transformer Thunderbird->HDFS        seed=0 F1=0.223 P=0.133 R=0.692 FPR=0.136 train_s=34.7 adapt=1000(35)
+[zero-shot] transformer Thunderbird->BGL         seed=0 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=33.6
+[adapt5   ] transformer Thunderbird->BGL         seed=0 F1=0.975 P=0.958 R=0.992 FPR=0.036 train_s=8.3 adapt=1000(453)
+[local    ] transformer Thunderbird->Thunderbird seed=0 F1=0.976 P=0.954 R=1.000 FPR=0.135 train_s=33.6
+done
+HDFS: sessions=575061 anom=16838 event_types=29 unmapped_event_ids=[] train=20000(586) val=5000(146) test=115013(3367)
+BGL: sessions=69252 anom=31375 event_types=394 unmapped_event_ids=[] train=20000(9061) val=5000(2266) test=13851(6275)
+Thunderbird: sessions=5855 anom=4309 event_types=6178 unmapped_event_ids=['6425'] train=4098(3016) val=585(431) test=1172(862)
+template-word overlap HDFS-Thunderbird: 53 shared of 3813
+template-word overlap BGL-HDFS: 31 shared of 707
+template-word overlap BGL-Thunderbird: 399 shared of 4057
+python 3.13.17 | torch 2.14.1+cu130 | sklearn 1.9.1 | numpy 2.5.3 | threads 2 | seeds [1, 2, 3, 4]
+HDFS: sessions=575061 anom=16838 event_types=29 unmapped_event_ids=[] train=20000(586) val=5000(146) test=115013(3367)
+BGL: sessions=69252 anom=31375 event_types=394 unmapped_event_ids=[] train=20000(9061) val=5000(2266) test=13851(6275)
+Thunderbird: sessions=5855 anom=4309 event_types=6178 unmapped_event_ids=['6425'] train=4098(3016) val=585(431) test=1172(862)
+template-word overlap HDFS-Thunderbird: 53 shared of 3813
+template-word overlap BGL-HDFS: 31 shared of 707
+template-word overlap BGL-Thunderbird: 399 shared of 4057
+python 3.13.17 | torch 2.14.1+cu130 | sklearn 1.9.1 | numpy 2.5.3 | threads 2 | seeds [1, 2, 3, 4]
+[local    ] logreg      HDFS->HDFS        seed=1 F1=0.942 P=0.890 R=1.000 FPR=0.004 train_s=0.1
+[zero-shot] logreg      HDFS->BGL         seed=1 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->BGL         seed=1 F1=0.735 P=0.581 R=1.000 FPR=0.598 train_s=0.1 adapt=1000(475)
+[zero-shot] logreg      HDFS->Thunderbird seed=1 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->Thunderbird seed=1 F1=0.945 P=0.896 R=1.000 FPR=0.323 train_s=0.1 adapt=205(148)
+[zero-shot] logreg      BGL->HDFS        seed=1 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=0.2
+[adapt5   ] logreg      BGL->HDFS        seed=1 F1=0.527 P=1.000 R=0.358 FPR=0.000 train_s=0.2 adapt=1000(34)
+[local    ] logreg      BGL->BGL         seed=1 F1=0.980 P=0.992 R=0.969 FPR=0.007 train_s=0.5
+[zero-shot] logreg      BGL->Thunderbird seed=1 F1=0.836 P=0.733 R=0.973 FPR=0.987 train_s=0.1
+[adapt5   ] logreg      BGL->Thunderbird seed=1 F1=0.975 P=0.951 R=1.000 FPR=0.142 train_s=0.1 adapt=205(148)
+[zero-shot] logreg      Thunderbird->HDFS        seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->HDFS        seed=1 F1=0.526 P=1.000 R=0.357 FPR=0.000 train_s=0.2 adapt=1000(34)
+[zero-shot] logreg      Thunderbird->BGL         seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->BGL         seed=1 F1=0.863 P=0.978 R=0.772 FPR=0.015 train_s=0.2 adapt=1000(475)
+[local    ] logreg      Thunderbird->Thunderbird seed=1 F1=0.979 P=0.970 R=0.987 FPR=0.084 train_s=1.1
+[local    ] bilstm      HDFS->HDFS        seed=1 F1=0.942 P=0.891 R=1.000 FPR=0.004 train_s=29.2
+[zero-shot] bilstm      HDFS->BGL         seed=1 F1=0.000 P=0.010 R=0.000 FPR=0.013 train_s=29.2
+[adapt5   ] bilstm      HDFS->BGL         seed=1 F1=0.916 P=0.880 R=0.955 FPR=0.108 train_s=2.3 adapt=1000(475)
+[zero-shot] bilstm      HDFS->Thunderbird seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.013 train_s=29.2
+[adapt5   ] bilstm      HDFS->Thunderbird seed=1 F1=0.933 P=0.878 R=0.995 FPR=0.384 train_s=0.4 adapt=205(148)
+[zero-shot] bilstm      BGL->HDFS        seed=1 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=29.7
+[adapt5   ] bilstm      BGL->HDFS        seed=1 F1=0.748 P=0.967 R=0.609 FPR=0.001 train_s=12.5 adapt=1000(34)
+[local    ] bilstm      BGL->BGL         seed=1 F1=0.985 P=0.985 R=0.984 FPR=0.012 train_s=29.7
+[zero-shot] bilstm      BGL->Thunderbird seed=1 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=29.7
+[adapt5   ] bilstm      BGL->Thunderbird seed=1 F1=0.508 P=0.614 R=0.433 FPR=0.755 train_s=0.5 adapt=205(148)
+[zero-shot] bilstm      Thunderbird->HDFS        seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=8.8
+[adapt5   ] bilstm      Thunderbird->HDFS        seed=1 F1=0.100 P=0.055 R=0.505 FPR=0.261 train_s=12.4 adapt=1000(34)
+[zero-shot] bilstm      Thunderbird->BGL         seed=1 F1=0.002 P=1.000 R=0.001 FPR=0.000 train_s=8.8
+[adapt5   ] bilstm      Thunderbird->BGL         seed=1 F1=0.889 P=0.963 R=0.826 FPR=0.027 train_s=2.3 adapt=1000(475)
+[local    ] bilstm      Thunderbird->Thunderbird seed=1 F1=0.976 P=0.954 R=1.000 FPR=0.135 train_s=8.8
+[local    ] transformer HDFS->HDFS        seed=1 F1=0.988 P=0.978 R=0.999 FPR=0.001 train_s=155.0
+[zero-shot] transformer HDFS->BGL         seed=1 F1=0.035 P=0.895 R=0.018 FPR=0.002 train_s=155.0
+[adapt5   ] transformer HDFS->BGL         seed=1 F1=0.676 P=0.886 R=0.547 FPR=0.058 train_s=7.9 adapt=1000(475)
+[zero-shot] transformer HDFS->Thunderbird seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=155.0
+[adapt5   ] transformer HDFS->Thunderbird seed=1 F1=0.932 P=0.873 R=1.000 FPR=0.403 train_s=1.4 adapt=205(148)
+[zero-shot] transformer BGL->HDFS        seed=1 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=150.6
+[adapt5   ] transformer BGL->HDFS        seed=1 F1=0.213 P=0.126 R=0.678 FPR=0.141 train_s=32.5 adapt=1000(34)
+[local    ] transformer BGL->BGL         seed=1 F1=0.999 P=1.000 R=0.998 FPR=0.000 train_s=150.6
+[zero-shot] transformer BGL->Thunderbird seed=1 F1=0.340 P=0.914 R=0.209 FPR=0.055 train_s=150.6
+[adapt5   ] transformer BGL->Thunderbird seed=1 F1=0.976 P=0.952 R=1.000 FPR=0.139 train_s=1.3 adapt=205(148)
+[zero-shot] transformer Thunderbird->HDFS        seed=1 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=32.8
+[adapt5   ] transformer Thunderbird->HDFS        seed=1 F1=0.571 P=0.990 R=0.402 FPR=0.000 train_s=32.1 adapt=1000(34)
+[zero-shot] transformer Thunderbird->BGL         seed=1 F1=0.592 P=0.484 R=0.760 FPR=0.671 train_s=32.8
+[adapt5   ] transformer Thunderbird->BGL         seed=1 F1=0.984 P=0.970 R=1.000 FPR=0.026 train_s=7.6 adapt=1000(475)
+[local    ] transformer Thunderbird->Thunderbird seed=1 F1=0.970 P=0.942 R=1.000 FPR=0.171 train_s=32.8
+[local    ] logreg      HDFS->HDFS        seed=2 F1=0.942 P=0.890 R=1.000 FPR=0.004 train_s=0.1
+[zero-shot] logreg      HDFS->BGL         seed=2 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->BGL         seed=2 F1=0.720 P=0.563 R=1.000 FPR=0.644 train_s=0.1 adapt=1000(500)
+[zero-shot] logreg      HDFS->Thunderbird seed=2 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->Thunderbird seed=2 F1=0.945 P=0.896 R=1.000 FPR=0.323 train_s=0.1 adapt=205(161)
+[zero-shot] logreg      BGL->HDFS        seed=2 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=0.2
+[adapt5   ] logreg      BGL->HDFS        seed=2 F1=0.319 P=1.000 R=0.190 FPR=0.000 train_s=0.1 adapt=1000(26)
+[local    ] logreg      BGL->BGL         seed=2 F1=0.980 P=0.992 R=0.969 FPR=0.007 train_s=0.5
+[zero-shot] logreg      BGL->Thunderbird seed=2 F1=0.836 P=0.733 R=0.973 FPR=0.987 train_s=0.1
+[adapt5   ] logreg      BGL->Thunderbird seed=2 F1=0.975 P=0.951 R=1.000 FPR=0.142 train_s=0.1 adapt=205(161)
+[zero-shot] logreg      Thunderbird->HDFS        seed=2 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->HDFS        seed=2 F1=0.319 P=1.000 R=0.190 FPR=0.000 train_s=0.2 adapt=1000(26)
+[zero-shot] logreg      Thunderbird->BGL         seed=2 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->BGL         seed=2 F1=0.880 P=0.977 R=0.800 FPR=0.016 train_s=0.2 adapt=1000(500)
+[local    ] logreg      Thunderbird->Thunderbird seed=2 F1=0.979 P=0.970 R=0.987 FPR=0.084 train_s=1.0
+[local    ] bilstm      HDFS->HDFS        seed=2 F1=0.977 P=0.956 R=0.999 FPR=0.001 train_s=27.6
+[zero-shot] bilstm      HDFS->BGL         seed=2 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=27.6
+[adapt5   ] bilstm      HDFS->BGL         seed=2 F1=0.635 P=0.465 R=1.000 FPR=0.951 train_s=2.0 adapt=1000(500)
+[zero-shot] bilstm      HDFS->Thunderbird seed=2 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=27.6
+[adapt5   ] bilstm      HDFS->Thunderbird seed=2 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=0.4 adapt=205(161)
+[zero-shot] bilstm      BGL->HDFS        seed=2 F1=0.053 P=0.027 R=0.922 FPR=1.000 train_s=27.6
+[adapt5   ] bilstm      BGL->HDFS        seed=2 F1=0.124 P=0.078 R=0.311 FPR=0.111 train_s=11.7 adapt=1000(26)
+[local    ] bilstm      BGL->BGL         seed=2 F1=1.000 P=1.000 R=0.999 FPR=0.000 train_s=27.6
+[zero-shot] bilstm      BGL->Thunderbird seed=2 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=27.6
+[adapt5   ] bilstm      BGL->Thunderbird seed=2 F1=0.735 P=0.950 R=0.599 FPR=0.087 train_s=0.4 adapt=205(161)
+[zero-shot] bilstm      Thunderbird->HDFS        seed=2 F1=0.007 P=1.000 R=0.004 FPR=0.000 train_s=9.1
+[adapt5   ] bilstm      Thunderbird->HDFS        seed=2 F1=0.174 P=0.099 R=0.758 FPR=0.209 train_s=12.1 adapt=1000(26)
+[zero-shot] bilstm      Thunderbird->BGL         seed=2 F1=0.336 P=0.278 R=0.425 FPR=0.916 train_s=9.1
+[adapt5   ] bilstm      Thunderbird->BGL         seed=2 F1=0.861 P=0.938 R=0.795 FPR=0.043 train_s=2.1 adapt=1000(500)
+[local    ] bilstm      Thunderbird->Thunderbird seed=2 F1=0.976 P=0.954 R=1.000 FPR=0.135 train_s=9.1
+[local    ] transformer HDFS->HDFS        seed=2 F1=0.942 P=0.891 R=1.000 FPR=0.004 train_s=150.4
+[zero-shot] transformer HDFS->BGL         seed=2 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=150.4
+[adapt5   ] transformer HDFS->BGL         seed=2 F1=0.927 P=0.900 R=0.956 FPR=0.088 train_s=8.0 adapt=1000(500)
+[zero-shot] transformer HDFS->Thunderbird seed=2 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=150.4
+[adapt5   ] transformer HDFS->Thunderbird seed=2 F1=0.101 P=0.458 R=0.057 FPR=0.187 train_s=1.3 adapt=205(161)
+[zero-shot] transformer BGL->HDFS        seed=2 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=152.3
+[adapt5   ] transformer BGL->HDFS        seed=2 F1=0.877 P=0.878 R=0.877 FPR=0.004 train_s=32.5 adapt=1000(26)
+[local    ] transformer BGL->BGL         seed=2 F1=1.000 P=1.000 R=0.999 FPR=0.000 train_s=152.3
+[zero-shot] transformer BGL->Thunderbird seed=2 F1=0.860 P=0.754 R=1.000 FPR=0.906 train_s=152.3
+[adapt5   ] transformer BGL->Thunderbird seed=2 F1=0.947 P=0.953 R=0.942 FPR=0.129 train_s=1.3 adapt=205(161)
+[zero-shot] transformer Thunderbird->HDFS        seed=2 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=33.0
+[adapt5   ] transformer Thunderbird->HDFS        seed=2 F1=0.144 P=0.080 R=0.705 FPR=0.244 train_s=33.3 adapt=1000(26)
+[zero-shot] transformer Thunderbird->BGL         seed=2 F1=0.545 P=0.407 R=0.825 FPR=0.996 train_s=33.0
+[adapt5   ] transformer Thunderbird->BGL         seed=2 F1=0.926 P=0.903 R=0.951 FPR=0.085 train_s=8.0 adapt=1000(500)
+[local    ] transformer Thunderbird->Thunderbird seed=2 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=33.0
+[local    ] logreg      HDFS->HDFS        seed=3 F1=0.942 P=0.890 R=1.000 FPR=0.004 train_s=0.1
+[zero-shot] logreg      HDFS->BGL         seed=3 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->BGL         seed=3 F1=0.765 P=0.620 R=1.000 FPR=0.508 train_s=0.1 adapt=1000(468)
+[zero-shot] logreg      HDFS->Thunderbird seed=3 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->Thunderbird seed=3 F1=0.945 P=0.896 R=1.000 FPR=0.323 train_s=0.1 adapt=205(147)
+[zero-shot] logreg      BGL->HDFS        seed=3 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=0.2
+[adapt5   ] logreg      BGL->HDFS        seed=3 F1=0.526 P=1.000 R=0.357 FPR=0.000 train_s=0.1 adapt=1000(26)
+[local    ] logreg      BGL->BGL         seed=3 F1=0.980 P=0.992 R=0.969 FPR=0.007 train_s=0.5
+[zero-shot] logreg      BGL->Thunderbird seed=3 F1=0.836 P=0.733 R=0.973 FPR=0.987 train_s=0.1
+[adapt5   ] logreg      BGL->Thunderbird seed=3 F1=0.976 P=0.952 R=1.000 FPR=0.139 train_s=0.1 adapt=205(147)
+[zero-shot] logreg      Thunderbird->HDFS        seed=3 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->HDFS        seed=3 F1=0.319 P=1.000 R=0.190 FPR=0.000 train_s=0.2 adapt=1000(26)
+[zero-shot] logreg      Thunderbird->BGL         seed=3 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->BGL         seed=3 F1=0.873 P=0.979 R=0.787 FPR=0.014 train_s=0.3 adapt=1000(468)
+[local    ] logreg      Thunderbird->Thunderbird seed=3 F1=0.979 P=0.970 R=0.987 FPR=0.084 train_s=1.1
+[local    ] bilstm      HDFS->HDFS        seed=3 F1=0.986 P=0.973 R=0.999 FPR=0.001 train_s=32.4
+[zero-shot] bilstm      HDFS->BGL         seed=3 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=32.4
+[adapt5   ] bilstm      HDFS->BGL         seed=3 F1=0.487 P=0.843 R=0.343 FPR=0.053 train_s=2.2 adapt=1000(468)
+[zero-shot] bilstm      HDFS->Thunderbird seed=3 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=32.4
+[adapt5   ] bilstm      HDFS->Thunderbird seed=3 F1=0.002 P=0.005 R=0.001 FPR=0.684 train_s=0.4 adapt=205(147)
+[zero-shot] bilstm      BGL->HDFS        seed=3 F1=0.053 P=0.027 R=0.922 FPR=1.000 train_s=31.3
+[adapt5   ] bilstm      BGL->HDFS        seed=3 F1=0.090 P=0.048 R=0.773 FPR=0.467 train_s=13.4 adapt=1000(26)
+[local    ] bilstm      BGL->BGL         seed=3 F1=0.998 P=0.999 R=0.997 FPR=0.001 train_s=31.3
+[zero-shot] bilstm      BGL->Thunderbird seed=3 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=31.3
+[adapt5   ] bilstm      BGL->Thunderbird seed=3 F1=0.734 P=0.961 R=0.594 FPR=0.068 train_s=0.5 adapt=205(147)
+[zero-shot] bilstm      Thunderbird->HDFS        seed=3 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=9.3
+[adapt5   ] bilstm      Thunderbird->HDFS        seed=3 F1=0.757 P=0.946 R=0.631 FPR=0.001 train_s=12.5 adapt=1000(26)
+[zero-shot] bilstm      Thunderbird->BGL         seed=3 F1=0.478 P=0.709 R=0.361 FPR=0.123 train_s=9.3
+[adapt5   ] bilstm      Thunderbird->BGL         seed=3 F1=0.861 P=0.936 R=0.796 FPR=0.045 train_s=2.4 adapt=1000(468)
+[local    ] bilstm      Thunderbird->Thunderbird seed=3 F1=0.977 P=0.955 R=1.000 FPR=0.132 train_s=9.3
+[local    ] transformer HDFS->HDFS        seed=3 F1=0.983 P=0.967 R=1.000 FPR=0.001 train_s=157.7
+[zero-shot] transformer HDFS->BGL         seed=3 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=157.7
+[adapt5   ] transformer HDFS->BGL         seed=3 F1=0.493 P=0.895 R=0.340 FPR=0.033 train_s=7.9 adapt=1000(468)
+[zero-shot] transformer HDFS->Thunderbird seed=3 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=157.7
+[adapt5   ] transformer HDFS->Thunderbird seed=3 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=1.4 adapt=205(147)
+[zero-shot] transformer BGL->HDFS        seed=3 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=157.0
+[adapt5   ] transformer BGL->HDFS        seed=3 F1=0.556 P=1.000 R=0.385 FPR=0.000 train_s=33.0 adapt=1000(26)
+[local    ] transformer BGL->BGL         seed=3 F1=0.992 P=1.000 R=0.985 FPR=0.000 train_s=157.0
+[zero-shot] transformer BGL->Thunderbird seed=3 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=157.0
+[adapt5   ] transformer BGL->Thunderbird seed=3 F1=0.944 P=0.898 R=0.997 FPR=0.316 train_s=1.4 adapt=205(147)
+[zero-shot] transformer Thunderbird->HDFS        seed=3 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=33.5
+[adapt5   ] transformer Thunderbird->HDFS        seed=3 F1=0.190 P=0.106 R=0.905 FPR=0.230 train_s=33.5 adapt=1000(26)
+[zero-shot] transformer Thunderbird->BGL         seed=3 F1=0.619 P=0.452 R=0.983 FPR=0.986 train_s=33.5
+[adapt5   ] transformer Thunderbird->BGL         seed=3 F1=0.952 P=0.930 R=0.976 FPR=0.061 train_s=8.4 adapt=1000(468)
+[local    ] transformer Thunderbird->Thunderbird seed=3 F1=0.976 P=0.954 R=1.000 FPR=0.135 train_s=33.5
+[local    ] logreg      HDFS->HDFS        seed=4 F1=0.942 P=0.890 R=1.000 FPR=0.004 train_s=0.1
+[zero-shot] logreg      HDFS->BGL         seed=4 F1=0.624 P=0.453 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->BGL         seed=4 F1=0.769 P=0.624 R=1.000 FPR=0.499 train_s=0.1 adapt=1000(444)
+[zero-shot] logreg      HDFS->Thunderbird seed=4 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=0.1
+[adapt5   ] logreg      HDFS->Thunderbird seed=4 F1=0.971 P=0.943 R=1.000 FPR=0.168 train_s=0.1 adapt=205(163)
+[zero-shot] logreg      BGL->HDFS        seed=4 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=0.2
+[adapt5   ] logreg      BGL->HDFS        seed=4 F1=0.526 P=1.000 R=0.357 FPR=0.000 train_s=0.1 adapt=1000(29)
+[local    ] logreg      BGL->BGL         seed=4 F1=0.980 P=0.992 R=0.969 FPR=0.007 train_s=0.5
+[zero-shot] logreg      BGL->Thunderbird seed=4 F1=0.836 P=0.733 R=0.973 FPR=0.987 train_s=0.1
+[adapt5   ] logreg      BGL->Thunderbird seed=4 F1=0.975 P=0.951 R=1.000 FPR=0.142 train_s=0.1 adapt=205(163)
+[zero-shot] logreg      Thunderbird->HDFS        seed=4 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->HDFS        seed=4 F1=0.319 P=1.000 R=0.190 FPR=0.000 train_s=0.3 adapt=1000(29)
+[zero-shot] logreg      Thunderbird->BGL         seed=4 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=0.2
+[adapt5   ] logreg      Thunderbird->BGL         seed=4 F1=0.868 P=0.988 R=0.773 FPR=0.008 train_s=0.2 adapt=1000(444)
+[local    ] logreg      Thunderbird->Thunderbird seed=4 F1=0.979 P=0.970 R=0.987 FPR=0.084 train_s=1.0
+[local    ] bilstm      HDFS->HDFS        seed=4 F1=0.979 P=0.961 R=0.999 FPR=0.001 train_s=29.6
+[zero-shot] bilstm      HDFS->BGL         seed=4 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=29.6
+[adapt5   ] bilstm      HDFS->BGL         seed=4 F1=0.822 P=0.707 R=0.982 FPR=0.337 train_s=2.2 adapt=1000(444)
+[zero-shot] bilstm      HDFS->Thunderbird seed=4 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=29.6
+[adapt5   ] bilstm      HDFS->Thunderbird seed=4 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=0.4 adapt=205(163)
+[zero-shot] bilstm      BGL->HDFS        seed=4 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=30.8
+[adapt5   ] bilstm      BGL->HDFS        seed=4 F1=0.700 P=0.639 R=0.774 FPR=0.013 train_s=13.2 adapt=1000(29)
+[local    ] bilstm      BGL->BGL         seed=4 F1=0.995 P=1.000 R=0.991 FPR=0.000 train_s=30.8
+[zero-shot] bilstm      BGL->Thunderbird seed=4 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=30.8
+[adapt5   ] bilstm      BGL->Thunderbird seed=4 F1=0.936 P=0.960 R=0.913 FPR=0.106 train_s=0.4 adapt=205(163)
+[zero-shot] bilstm      Thunderbird->HDFS        seed=4 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=11.7
+[adapt5   ] bilstm      Thunderbird->HDFS        seed=4 F1=0.118 P=0.063 R=0.971 FPR=0.436 train_s=13.8 adapt=1000(29)
+[zero-shot] bilstm      Thunderbird->BGL         seed=4 F1=0.308 P=0.427 R=0.240 FPR=0.267 train_s=11.7
+[adapt5   ] bilstm      Thunderbird->BGL         seed=4 F1=0.877 P=0.943 R=0.820 FPR=0.041 train_s=2.6 adapt=1000(444)
+[local    ] bilstm      Thunderbird->Thunderbird seed=4 F1=0.975 P=0.950 R=1.000 FPR=0.145 train_s=11.7
+[local    ] transformer HDFS->HDFS        seed=4 F1=0.976 P=0.968 R=0.984 FPR=0.001 train_s=156.0
+[zero-shot] transformer HDFS->BGL         seed=4 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=156.0
+[adapt5   ] transformer HDFS->BGL         seed=4 F1=0.667 P=0.896 R=0.531 FPR=0.051 train_s=8.0 adapt=1000(444)
+[zero-shot] transformer HDFS->Thunderbird seed=4 F1=0.110 P=0.980 R=0.058 FPR=0.003 train_s=156.0
+[adapt5   ] transformer HDFS->Thunderbird seed=4 F1=0.831 P=0.831 R=0.832 FPR=0.471 train_s=1.4 adapt=205(163)
+[zero-shot] transformer BGL->HDFS        seed=4 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=158.3
+[adapt5   ] transformer BGL->HDFS        seed=4 F1=0.057 P=0.029 R=1.000 FPR=1.000 train_s=32.6 adapt=1000(29)
+[local    ] transformer BGL->BGL         seed=4 F1=1.000 P=1.000 R=0.999 FPR=0.000 train_s=158.3
+[zero-shot] transformer BGL->Thunderbird seed=4 F1=0.848 P=0.735 R=1.000 FPR=1.000 train_s=158.3
+[adapt5   ] transformer BGL->Thunderbird seed=4 F1=0.972 P=0.952 R=0.992 FPR=0.139 train_s=1.4 adapt=205(163)
+[zero-shot] transformer Thunderbird->HDFS        seed=4 F1=0.000 P=0.000 R=0.000 FPR=0.000 train_s=32.8
+[adapt5   ] transformer Thunderbird->HDFS        seed=4 F1=0.272 P=0.168 R=0.717 FPR=0.107 train_s=32.6 adapt=1000(29)
+[zero-shot] transformer Thunderbird->BGL         seed=4 F1=0.460 P=0.551 R=0.394 FPR=0.266 train_s=32.8
+[adapt5   ] transformer Thunderbird->BGL         seed=4 F1=0.997 P=0.998 R=0.995 FPR=0.002 train_s=7.9 adapt=1000(444)
+[local    ] transformer Thunderbird->Thunderbird seed=4 F1=0.976 P=0.954 R=1.000 FPR=0.135 train_s=32.8
+done

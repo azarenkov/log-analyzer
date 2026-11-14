@@ -201,6 +201,7 @@ for seed in SEEDS:
             for t in DATASETS:
                 te = D[t]["te"]; yt = D[t]["y"][te]
                 if s == t:
+                    if model != "logreg": net.load_state_dict(base_state)  # FIX: restore the source checkpoint (earlier adapt5 branches fine-tune net in place)
                     yp = lr_fit_predict([(s, D[s]["tr"])], (t, te)) if model == "logreg" else predict(net, vocab, t, te)
                     record(dict(model=model, setting="local", source=s, target=t, seed=seed, train_s=time.time() - t0 if model == "logreg" else t_base), yt, yp)
                     continue
